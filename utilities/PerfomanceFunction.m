@@ -12,16 +12,16 @@ classdef PerfomanceFunction
 %
 %
 %   Usage: 
-%   performance = PerfomanceFunction(expDecay, r0, rInf);
+%     performance = PerfomanceFunction(expDecay, r0, rInf);
 %
-%   % scalar case
-%   performance.rho(t)    % value of the performance function at time t
-%   performance.rhoDot(t) % value of the performance function's first
+%     % scalar case
+%     performance.rho(t)    % value of the performance function at time t
+%     performance.rhoDot(t) % value of the performance function's first
 %                         % derivative at time t
 %
-%   % vector case
-%   performance.rho(T)    % matrix of the performance function values
-%                         % for each instance of matrix T
+%     % vector case
+%     performance.rho(T)    % matrix of the performance function values
+%                           % for each instance of matrix T
     
     properties     % To add validation in new Matlab version
         expDecay
