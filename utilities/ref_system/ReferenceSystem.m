@@ -11,7 +11,6 @@ classdef ReferenceSystem < handle
 %     obj = obj@ReferenceSystem(N);
 %
 
-    
     properties
         N     % class order matrix
         M     % number of subsystems (maybe a more descriptive name needed)
