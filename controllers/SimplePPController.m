@@ -10,9 +10,9 @@ classdef SimplePPController <  AbstractController
         gains = struct('k',1,'lambda',1);
         
         % Auxilary variables 
-        surfaceCoeff
-        coeffMatrix
-        
+        surfaceCoeff    % coefficients for each sub-system
+        coeffMatrix     % merged version for easier in-loop
+                        % calculations
     end
     
     methods
@@ -37,12 +37,12 @@ classdef SimplePPController <  AbstractController
             obj.coeffMatrix = [obj.surfaceCoeff{:}]';
         end
         
-        function [u,ksi,e] = controlLaw(obj, t, x, x_r)
+        function [u,ksi,e] = controlLaw(obj, t, x, x_ref)
             %% Create Signals
-            e   = x - x_r;
+            e   = x - x_ref;
             
             % Create the surface error for each sub-system
-            sigma = zeros(obj.M,size(x,2));
+            sigma = zeros(obj.M, size(x,2));
             tmp = bsxfun(@times,e,obj.coeffMatrix); % gucci
             
             % Calculate surface value for every sub-system
@@ -53,12 +53,40 @@ classdef SimplePPController <  AbstractController
             
             % Ksi(t) for each time instance
             ksi = bsxfun(@rdivide,sigma,obj.performance.rho(t));
+            
             %% Return u(t) using the transform
             u = obj.transform.T(ksi);
         end
         
         function controlSignals()
         end  
+        
+        function v = leftoverErrors(obj, t, x, x_r)
+            %% Signals
+            % Trajectory error
+            e   = x - x_r;
+            
+            % Coefficients and error vector filtering
+            % coefficients
+            aux = cumsum(obj.N);
+            tmp = obj.coeffMatrix;
+            tmp(aux) = [];        % remove order states  coefficients
+            
+            % error vector filter
+            aux = cumsum([1;obj.N(1:end-1)]);
+            e(aux,:) = [];        % remove order states from error vector
+            
+            %% Final sum calculation (for every time step) 
+            v = zeros(obj.M,size(x,2));
+            tmp = bsxfun(@times,e,tmp);
+            
+            % Calculate leftovers for every sub-system
+            subIndexes = [0;cumsum(obj.N - 1)];
+            for i = 1:obj.M
+                v(i,:) = sum(tmp(1+subIndexes(i) : subIndexes(i+1),:),1);
+            end
+            
+        end
         
     end
     
