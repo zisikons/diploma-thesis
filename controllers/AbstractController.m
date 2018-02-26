@@ -1,8 +1,6 @@
-classdef AbstractController  % Inherit from Handle?
+classdef AbstractController
 %AbstractController Interface class for controllers
 %
-%   Detailed explanation goes here
-    
     properties
         N     % system stracture
         M     % number of subsystems
@@ -24,7 +22,6 @@ classdef AbstractController  % Inherit from Handle?
         end
         
         % To implement
-        controlSignals(obj,varargin);
         controlLaw(obj,varargin);
     end
     
