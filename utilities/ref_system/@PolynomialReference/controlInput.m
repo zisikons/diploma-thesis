@@ -22,7 +22,7 @@ function u = controlInput(obj, t)
 %         ----- uM(T) -----]
 %
     % Initiallization
-    t = t(:);
+    t = t(:) - obj.t_start;
     u = zeros(obj.M, length(t));
 
     % Calculate input vector for each subsystem

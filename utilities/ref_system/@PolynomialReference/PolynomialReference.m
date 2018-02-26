@@ -37,6 +37,7 @@ classdef PolynomialReference < ReferenceSystem
         x0
         xT
         DT
+        t_start = 0
         
         inputBoundary = 0;
         inputCoeff           % polynomial coefficients for input calculation
@@ -68,10 +69,21 @@ classdef PolynomialReference < ReferenceSystem
             end
         end
         
+        function setInitTime(obj, t_start)
+        %setInitTime Internal variable update for time transforms.
+        %
+        %  Polynomial reference class provides an internal variable t_start
+        %  so the transformation [t0, t0 + DT] is done internally and is
+        %  not left to the user. This function can be also called from
+        %  setTransition( ) as an optional argument.
+        
+            obj.t_start = t_start;
+        end
+        
         % Implemented in other files (more complex functions)
         [regressionMatrix, inputCoeff] = updateStaticParametersSI(obj,N)
         u = controlInput(obj, t)
-        setTransition(obj, x0, xT)        
+        setTransition(obj, x0, xT,t_start)        
     end
 end
 
