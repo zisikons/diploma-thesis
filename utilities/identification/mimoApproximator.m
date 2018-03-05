@@ -1,4 +1,4 @@
-classdef mimoApproximator
+classdef mimoApproximator < handle
 %mimoApproximator Class for regressor approximations in a MIMO system.
 %
 %   This class containts the necessary information for describing or 
