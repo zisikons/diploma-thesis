@@ -2,8 +2,8 @@ classdef  rbfApproximator < mimoApproximator
 %rbfFunctoin Radial Basis Approximators for MIMO systems.
 %
 %   # TODO
-%            % Idea for future: Enable different regressor function as an
-%            % initiallization, for future use of the code
+%       % Idea for future: Enable different regressor function as an
+%       % initiallization, for future use of the code
 %
 %   # Notes:
 %      I think current imlementation of weights and storage is extremely
@@ -95,7 +95,7 @@ classdef  rbfApproximator < mimoApproximator
             % gamma(:,:,2) = G(t1)
             %        ...
             gamma = obj.wg * obj.Zg( x );
-            gamma = reshape(gamma,2,2,[]);
+            gamma = reshape(gamma, obj.M ,obj.M ,[]);
             
         end
           
