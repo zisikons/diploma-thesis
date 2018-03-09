@@ -98,19 +98,14 @@ classdef  rbfApproximator < mimoApproximator
             gamma = reshape(gamma, obj.M ,obj.M ,[]);
             
         end
-          
-        function [] =  estimatorDerivatives(obj, varargin)
-            
-        end
-        
-        
         
         %%%%%%%%%%% Signatures defined in files
         proper_format =  validateStructFormat(obj,rbf_struct);
         y  = Zf( obj, X );
         y  = Zg( obj, X );
         
-        obj = setWeights(obj, w_hat);
+        setWeights(obj, w_hat);
+        varargout =  estimatorDerivatives(obj, varargin)
 
     end
     

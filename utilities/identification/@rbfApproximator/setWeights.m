@@ -1,4 +1,4 @@
-function [obj] =  setWeights(obj, w_hat)
+function [] =  setWeights(obj, w_hat)
 % Naive implementation. There is a tryhard alternative
 %
 %   current storage = [ --- wf1 weights ----, ---- wf2 weights ----, ...
