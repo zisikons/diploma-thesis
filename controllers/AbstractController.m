@@ -1,4 +1,4 @@
-classdef AbstractController
+classdef AbstractController < handle
 %AbstractController Interface class for controllers
 %
     properties
