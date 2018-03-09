@@ -33,6 +33,6 @@ function [u,ksi,e] = controlLaw(obj, t, x, x_ref)
     ksi = bsxfun(@rdivide,sigma,obj.performance.rho(t));
 
     %% Return u(t) using the transform
-    u = obj.transform.T(ksi);
+    u = -obj.gains.k * obj.transform.T(ksi)./(1 - ksi.^2);
 
 end
