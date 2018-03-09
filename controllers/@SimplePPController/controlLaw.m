@@ -34,4 +34,5 @@ function [u,ksi,e] = controlLaw(obj, t, x, x_ref)
 
     %% Return u(t) using the transform
     u = obj.transform.T(ksi);
+
 end

@@ -14,6 +14,7 @@ function v = leftoverErrors(obj, t, x, x_r)
 %     X_ref   = X(:, ref_states)';
 %     V = controller.contolLaw(T, X_plant, X_ref);
 %
+
     %% Signals
     % Trajectory error
     e   = x - x_r;

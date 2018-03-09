@@ -64,7 +64,10 @@ classdef SimplePPController <  AbstractController
             % vector
             obj.coeffMatrix = [obj.surfaceCoeff{:}]';
         end
-        
+
+        % To implement
+        %leftoverErrors(obj, t, x, x_r);
+        v = leftoverErrors(obj, t, x, x_r);
     end
     
 end
