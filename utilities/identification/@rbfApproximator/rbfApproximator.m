@@ -22,6 +22,16 @@ classdef  rbfApproximator < mimoApproximator
         % size
         regressorSize_f
         regressorSize_g
+        
+        % Gains (only used in case the approximator is used in a closed
+        % loop identification experiment)
+        weightGains = struct('gaussianPhi',1,...
+                             'gaussianGamma',1,...
+                             'biasPhi',1,...
+                             'biasGamma',1);
+                         
+        % Function Gains
+        functionGains = struct('Phi',[],'Gamma',[]);
     end
     
     methods        
@@ -68,6 +78,10 @@ classdef  rbfApproximator < mimoApproximator
             % Preallocate Weights
             obj.wf = zeros(obj.M, obj.regressorSize_f);
             obj.wg = zeros(obj.M^2, obj.regressorSize_g);
+            
+            % Default Gains
+            obj.functionGains.Phi   = ones(1, obj.M);
+            obj.functionGains.Gamma = ones(1, obj.M^2);
             
         end
         
